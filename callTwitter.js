@@ -4,13 +4,8 @@ const OAuth1 = require('OAuth').OAuth;
 const https = require("https");
 const Q = require('q');
 const sep = ";";
-var line=process.argv[3];
-    callApi(line).then(function (info) {
-        console.log(info);
-    });
 
-
-exports.callApi = function (dataIn) {
+var callApi = function (dataIn) {
     console.log("Recherche =>", dataIn);
     deferred = Q.defer();
     // Get your credentials here: https://dev.twitter.com/apps
@@ -62,3 +57,8 @@ exports.callApi = function (dataIn) {
         });
     return deferred.promise;
 }
+
+var line=process.argv[2];
+    callApi(line).then(function (info) {
+        console.log(info);
+    });
