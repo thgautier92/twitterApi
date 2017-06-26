@@ -6,7 +6,7 @@ const Q = require('q');
 const sep = ";";
 
 var callApi = function (dataIn) {
-    console.log("Recherche =>", dataIn);
+    //console.log("Recherche =>", dataIn);
     deferred = Q.defer();
     // Get your credentials here: https://dev.twitter.com/apps
     var _twitterConsumerKey = "cjNYea1Mx6WJScAvq27pZfskF";
@@ -29,36 +29,42 @@ var callApi = function (dataIn) {
         _accessToken, //test user token 
         _accessTokenSecret, //test user secret             
         function (e, data, res) {
-            if (e) console.error(e);
-            //console.log(util.inspect(data));
-            var jdata = JSON.parse(data);
-            console.log("Occurences trouvées pour ", dataIn, ":", jdata.length);
-            var dataOut = "";
-            jdata.forEach(function (elt) {
-                dataOut = dataOut + elt['id_str'] + sep +
-                    elt['name'] + sep +
-                    elt['screen_name'] + sep +
-                    elt['location'] + sep +
-                    util.inspect(elt['description']) + sep +
-                    elt['protected'] + sep +
-                    elt['followers_count'] + sep +
-                    elt['friends_count'] + sep +
-                    elt['favourites_count'] + sep +
-                    elt['statuses_count'] + sep +
-                    elt['created_at'] + "\n";
-            });
-            fs.writeFile('result.csv', dataOut, {
-                'encode': 'utf8',
-                'flag': 'a'
-            }, function (err) {
-                if (err) throw err;
-            });
-            deferred.resolve(true);
+            if (e) {
+                //console.error(e);
+                console.log("Occurences trouvées pour ", dataIn, ":", 0);
+                deferred.resolve(0);
+            } else {
+                //console.log("RESULTATS", util.inspect(data));
+                var jdata = JSON.parse(data);
+                console.log("Occurences trouvées pour ", dataIn, ":", jdata.length);
+                var dataOut = "";
+                jdata.forEach(function (elt) {
+                    dataOut = dataOut + elt['id_str'] + sep +
+                        elt['name'] + sep +
+                        elt['screen_name'] + sep +
+                        elt['location'] + sep +
+                        util.inspect(elt['description']) + sep +
+                        elt['protected'] + sep +
+                        elt['followers_count'] + sep +
+                        elt['friends_count'] + sep +
+                        elt['favourites_count'] + sep +
+                        elt['statuses_count'] + sep +
+                        elt['created_at'] + "\n";
+                });
+                fs.writeFile('result.csv', dataOut, {
+                    'encode': 'utf8',
+                    'flag': 'a'
+                }, function (err) {
+                    if (err) throw err;
+                });
+                deferred.resolve(jdata.length);
+            }
+
         });
     return deferred.promise;
 }
 
-var line=process.argv[2];
-    callApi(line).then(function (info) {
-        console.log(info);
-    });
+var line = process.argv[2];
+callApi(line).then(function (info) {
+    //console.log(info);
+});
