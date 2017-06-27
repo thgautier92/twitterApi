@@ -20,8 +20,7 @@ Cet outil a besoin des logiciels suivants :
 ```javascript
 node simple.js <chaine à rechercher>
 ```
-Le résultat est stoké dans le fichier `RESULT.CSV`.  
-Les données exportées, suite à la recherche sont : 
+Le résultat est stocké dans le fichier `RESULT.CSV`. Les données exportées sont : 
 * name
 * screen_name
 * location
@@ -34,8 +33,9 @@ Les données exportées, suite à la recherche sont :
 * created_at  
 Toutes les valeurs sont séparées par des points-virgules.  
 
-## Appel à partir d'un fichier de valeur
-Ce fichier nommé `LISTE.CSV` est un fichier contenant 1 enregistrement par recherche.  
+## Appel à partir d'un fichier de valeurs
+Cette option permet de lancer plusieurs recherche à la chaine, à partir d'un fichier de valeurs.  
+Ce fichier, nommé `LISTE.CSV` doit conteny 1 enregistrement par recherche.  
 La recherche supporte les espaces et respecte la casse.
 
 ### Génération de commandes pour chaque ligne du fichier 
