@@ -20,13 +20,14 @@ Les données exportées, suite à la recherche sont :
 * name
 * screen_name
 * location
-util.inspect(description']) + sep +
-protected
-followers_count
-friends_count
-favourites_count
-statuses_count
-created_at
+* description
+* protected
+* followers_count
+* friends_count
+* favourites_count
+* statuses_count
+* created_at
+Toutes les valeurs sont séparées par des virgules  
 
 ## Appel à partir d'un fichier de valeur
 Ce fichier nommé `LISTE.CSV` est un fichier contenant 1 enregistrement par recherche.  
