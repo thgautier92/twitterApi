@@ -8,7 +8,8 @@ Outil | Installation
 ------------ | -------------
 nodeJs | installation à partir du site : [nodejs](https://nodejs.org/)  
 module nodejs OAUTH | installation NPM, avec la commande `npm install oauth`  
-
+module nodejs PROMPT | installation NPM, avec la commande `npm install prompt`  
+module nodejs COLORS | installation NPM, avec la commande `npm install colors`  
 ## Appel UNITAIRE
 ```javascript
 nodejs simple.js <chaine à rechercher>

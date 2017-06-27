@@ -3,6 +3,7 @@ const fs = require('fs');
 const OAuth1 = require('OAuth').OAuth;
 const https = require("https");
 const Q = require('q');
+var fileResult = "result.csv";
 const sep = ";";
 
 var callApi = function (dataIn) {
@@ -51,7 +52,7 @@ var callApi = function (dataIn) {
                         elt['statuses_count'] + sep +
                         elt['created_at'] + "\n";
                 });
-                fs.writeFile('result.csv', dataOut, {
+                fs.writeFile(fileResult, dataOut, {
                     'encode': 'utf8',
                     'flag': 'a'
                 }, function (err) {
