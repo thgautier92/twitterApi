@@ -11,11 +11,13 @@ Cet outil a besoin des logiciels suivants :
 |module nodejs PROMPT | installation NPM, avec la commande `npm install prompt`  |
 |module nodejs COLORS | installation NPM, avec la commande `npm install colors`|
 
-| Outi | aaaa | aaa |
+| Outil| Usage | Installation |
 |------|------|-----|
-|      |      |     |
-|      |      |     |
-|      |      |     |
+| nodejs     |      |     |
+| module OAUTH     |      |     |
+| module PROMPT     |      |     |
+| module COLORS     |      |     |
+
 
 * * *
 ## Appel UNITAIRE
