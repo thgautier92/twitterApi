@@ -26,19 +26,21 @@ Les données exportées, suite à la recherche sont :
 * friends_count
 * favourites_count
 * statuses_count
-* created_at
-Toutes les valeurs sont séparées par des virgules  
+* created_at  
+Toutes les valeurs sont séparées par des points-virgules.  
 
 ## Appel à partir d'un fichier de valeur
 Ce fichier nommé `LISTE.CSV` est un fichier contenant 1 enregistrement par recherche.  
-Chaque enregistrement est formaté comme suit : nom,ville
+La recherche supporte les espaces et respecte la casse.
 
 ### Génération de commandes pour chaque ligne du fichier 
 ```javascript
 nodejs generate.js
 ```
-Le fichier START.SH est alors généré et contient toutes les commandes
-#### Execution des commandes générées
+Le fichier START.SH est alors généré et contient toutes les commandes.  
+Automatiquement le script lance START.SH et la recherche commence.  
+
+#### Execution manuelle des commandes générées
 ```javascript
 sh start.sh
 ```
