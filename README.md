@@ -17,9 +17,9 @@ nodejs simple.js <chaine à rechercher>
 ```
 Le résultat est stoké dans le fichier RESULT.CSV
 Les données exportées, suite à la recherche sont : 
-name
-screen_name
-location
+* name
+* screen_name
+* location
 util.inspect(description']) + sep +
 protected
 followers_count
