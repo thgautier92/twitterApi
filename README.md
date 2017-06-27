@@ -4,8 +4,8 @@ Outil d'excution de API TWITTER
 Cet outil permet l'excution unitaire ou à partir d'un fichier d'API de TWITTER
 ## Installation
 Cet outil a besoin des logiciels suivants :  
-Outil | Installation
------------- | -------------
+Outil | Installation  
+------------ | -------------  
 nodeJs | installation à partir du site : [nodejs](https://nodejs.org/)  
 module nodejs OAUTH | installation NPM, avec la commande `npm install oauth`  
 module nodejs PROMPT | installation NPM, avec la commande `npm install prompt`  
