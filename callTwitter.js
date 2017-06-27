@@ -1,12 +1,19 @@
+/* ======================================================================
+callTwitter.js
+script to call an Twitter API and store the result in a output CSV file
+=========================================================================
+*/
 const util = require('util');
 const fs = require('fs');
 const OAuth1 = require('OAuth').OAuth;
 const https = require("https");
 const Q = require('q');
+var lstApi = require("./refApi.js");
 var fileResult = "result.csv";
 const sep = ";";
 
-var callApi = function (dataIn) {
+
+var callApi = function (dataIn, apiId) {
     //console.log("Recherche =>", dataIn);
     deferred = Q.defer();
     // Get your credentials here: https://dev.twitter.com/apps
@@ -24,7 +31,7 @@ var callApi = function (dataIn) {
         null,
         'HMAC-SHA1'
     );
-    var url = "https://api.twitter.com/1.1/users/search.json?q=" + dataIn + "&page=5&count=20";
+    var url = lstApi.refApi[apiId].replace("{{dataIn}}", dataIn);
     oauth.get(
         url,
         _accessToken, //test user token 
@@ -64,8 +71,11 @@ var callApi = function (dataIn) {
         });
     return deferred.promise;
 }
+// ===== Start searching ===========================================
+// get all parametres in command line, except script path and name
 var arg = process.argv.splice(2, process.argv.length);
 var line = encodeURIComponent(arg.join(' '));
-callApi(line).then(function (info) {
+callApi(line, 0).then(function (info) {
     //console.log(info);
 });
+// ===== END =======================================================
