@@ -13,11 +13,11 @@ module nodejs OAUTH | installation NPM, avec la commande `npm install oauth`
 ```javascript
 nodejs simple.js <chaine à rechercher>
 ```
-Le résultat eststoké dans le fichier RESULT.CSV
+Le résultat est stoké dans le fichier RESULT.CSV
 
 ## Appel à partir d'un fichier de valeur
-Ce fichier nommé `LISTE.CSV` est un fichier contenant 1 enregistrement par recherche
-Chaque enregistrement est formaté comme suit : <nom>,<ville>
+Ce fichier nommé `LISTE.CSV` est un fichier contenant 1 enregistrement par recherche.  
+Chaque enregistrement est formaté comme suit : nom,ville
 
 ### Génération de commandes pour chaque ligne du fichier 
 ```javascript
