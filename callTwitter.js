@@ -23,7 +23,7 @@ var callApi = function (dataIn) {
         null,
         'HMAC-SHA1'
     );
-    var url = "https://api.twitter.com/1.1/users/search.json?q=" + dataIn + "&page=1&count=5";
+    var url = "https://api.twitter.com/1.1/users/search.json?q=" + dataIn + "&page=5&count=20";
     oauth.get(
         url,
         _accessToken, //test user token 
@@ -63,8 +63,8 @@ var callApi = function (dataIn) {
         });
     return deferred.promise;
 }
-
-var line = process.argv[2];
+var arg = process.argv.splice(2, process.argv.length);
+var line = encodeURIComponent(arg.join(' '));
 callApi(line).then(function (info) {
     //console.log(info);
 });
