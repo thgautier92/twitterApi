@@ -45,7 +45,7 @@ var generate = function () {
     dataOut = dataOut + "echo ==================================================\n";
     fs.readFileSync(fileInput).toString().split(/\r?\n/).forEach(function (line) {
         console.log(line);
-        dataOut = dataOut + "node callTwitter.js " + line + "\n";
+        dataOut = dataOut + "node callTwitter.js 0 true " + line + "\n";
     })
     fs.writeFile(fileOutput, dataOut, {
         'encode': 'utf8',
