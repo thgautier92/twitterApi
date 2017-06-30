@@ -1,0 +1,30 @@
+{
+  "name": "twitter_api",
+  "version": "1.0.0",
+  "description": "Automate tools for callin Twitter API",
+  "main": "generate.js",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "oauth": "^0.9.15",
+    "prompt": "^1.0.0",
+    "q": "^1.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node generate.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thgautier92/twitterApi.git"
+  },
+  "keywords": [
+    "twitter",
+    "api"
+  ],
+  "author": "Th.GAUTIER",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thgautier92/twitterApi/issues"
+  },
+  "homepage": "https://github.com/thgautier92/twitterApi#readme"
+}
