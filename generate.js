@@ -4,19 +4,30 @@ Reading use case and générate a call to callTwitter.js with nodejs
 =========================================================================
 */
 const fs = require('fs');
+const clear = require('clear');
 const prompt = require('prompt');
 const colors = require("colors/safe");
 const exec = require('child_process').exec;
 var lstApi = require("./refApi.js");
 
+var osType = process.platform;
 var fileInput = "liste.csv";
-var fileOutput = "start.sh";
+var fileOutput = "start";
+var command = "";
+if (osType == 'darwin') {
+    fileOutput = fileOutput + ".sh";
+    command = "sh " + fileOutput;
+} else {
+    fileOutput = fileOutput + ".cmd";
+    var command = "start " + fileOutput;
+}
 var fileResult = "result.csv";
-var command = "sh " + fileOutput;
-console.log('\033[2J');
+clear();
+//console.log('\033[2J');
+
 console.log('================================================================================');
 console.log('Génération des commandes pour les appels TWITTER, à partir du fichier', colors.red(fileInput));
-console.log('  ');
+console.log('OS : ', osType);
 console.log('================================================================================');
 console.log('Liste des API disponibles');
 var i = 0;
@@ -65,16 +76,23 @@ prompt.get(schema, function (err, result) {
                 console.log('Fichier supprimé');
             }
         });
-        generate(result.numApi);
+        generate(result.numApi, osType);
     }
     if (result.razFicOut == 'n' || result.razFicOut == 'n') {
-        generate(result.numApi);
+        generate(result.numApi, osType);
     }
 });
 
 
-var generate = function (numApi) {
-    var dataOut = "clear\necho " + lstApi.refApi[numApi]['title'] + "\n";
+var generate = function (numApi, osType) {
+    console.log(osType);
+    var dataOut = "";
+    if (osType == "darwin") {
+        dataOut = dataOut + "clear\n";
+    } else {
+        dataOut = dataOut + "cls\n";
+    }
+    dataOut = dataOut + "echo " + lstApi.refApi[numApi]['title'] + "\n";
     dataOut = dataOut + "echo ==================================================\n";
     fs.readFileSync(fileInput).toString().split(/\r?\n/).forEach(function (line) {
         console.log(line);
@@ -90,7 +108,9 @@ var generate = function (numApi) {
     console.log('================================================================================');
     console.log('Le script est généré dans le fichier', fileOutput);
     console.log('================================================================================');
-    require('child_process').spawn('sh', [fileOutput], {
-        stdio: 'inherit'
-    });
+    if (osType == "darwin") {
+        require('child_process').spawn('sh', [fileOutput], {
+            stdio: 'inherit'
+        });
+    }
 }
