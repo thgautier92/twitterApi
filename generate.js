@@ -12,7 +12,7 @@ var lstApi = require("./refApi.js");
 
 var osType = process.platform;
 var fileInput = "liste.csv";
-var fileOutput = "start";
+var fileOutput = "startUp";
 var command = "";
 if (osType == 'darwin') {
     fileOutput = fileOutput + ".sh";
@@ -85,12 +85,11 @@ prompt.get(schema, function (err, result) {
 
 
 var generate = function (numApi, osType) {
-    console.log(osType);
     var dataOut = "";
     if (osType == "darwin") {
         dataOut = dataOut + "clear\n";
     } else {
-        dataOut = dataOut + "cls\n";
+        dataOut = dataOut + "@echo off\ncls\n";
     }
     dataOut = dataOut + "echo " + lstApi.refApi[numApi]['title'] + "\n";
     dataOut = dataOut + "echo ==================================================\n";
@@ -109,8 +108,12 @@ var generate = function (numApi, osType) {
     console.log('Le script est généré dans le fichier', fileOutput);
     console.log('================================================================================');
     if (osType == "darwin") {
+        console.log("Lancement...(sh)");
         require('child_process').spawn('sh', [fileOutput], {
             stdio: 'inherit'
         });
+    } else {
+        console.log("Lancement...(cmd)",fileOutput);
+        require('child_process').execSync(fileOutput);
     }
 }
