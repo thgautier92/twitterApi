@@ -9,7 +9,9 @@ const OAuth1 = require('OAuth').OAuth;
 const https = require("https");
 const Q = require('q');
 const colors = require("colors/safe");
+
 var lstApi = require("./refApi.js");
+var keyAPi = require("./twitterAPI.js");
 const sep = ";";
 
 // ===== Function callApi ==========================================
@@ -17,17 +19,13 @@ var callApi = function (dataIn, apiId) {
     //console.log("Recherche =>", dataIn, apiId, format);
     deferred = Q.defer();
     // Get your credentials here: https://dev.twitter.com/apps
-    var _twitterConsumerKey = "cjNYea1Mx6WJScAvq27pZfskF";
-    var _twitterConsumerSecret = "XYgJLiTHR4vGB9zhMiZPgJXlOUdk2ZZsOthb55tC01fU5ezV7Z";
-    var _accessToken = "145807600-mtYhECTolWHCTNX3sLV2dzwnyhD5oqiq7A1Lhf5v";
-    var _accessTokenSecret = "3iiEZkohtONPeNjklIOfjUt4CtZnvCWzCQMFGDTkkAFIK";
     // -----------------------------------------------------------------------
     var fileResult = lstApi.refApi[apiId]['fileOut'];
     var oauth = new OAuth1(
         'https://api.twitter.com/oauth/request_token',
         'https://api.twitter.com/oauth/access_token',
-        _twitterConsumerKey,
-        _twitterConsumerSecret,
+        keyAPi._twitterConsumerKey,
+        keyAPi._twitterConsumerSecret,
         '1.0A',
         null,
         'HMAC-SHA1'
@@ -35,8 +33,8 @@ var callApi = function (dataIn, apiId) {
     var url = lstApi.refApi[apiId]['url'].replace("{{datain}}", dataIn);
     oauth.get(
         url,
-        _accessToken, //test user token 
-        _accessTokenSecret, //test user secret             
+        keyAPi._accessToken, //test user token 
+        keyAPi._accessTokenSecret, //test user secret             
         function (e, data, res) {
             if (e) {
                 //console.error(e);
