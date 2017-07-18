@@ -5,17 +5,18 @@ Cet outil permet l'excution unitaire ou à partir d'un fichier d'API de TWITTER.
 L'api disponible permet de recherche l'existence d'un compte twitter, à partir d'une chaine de caractères de recherche.  
 * * *
 ## Pré-requis
-Vous devez disposer d'un compte TWITTER et avoir activer l'usage des APIs sur votre compte.
+Vous devez disposer d'un compte TWITTER et avoir activé l'usage des APIs sur votre compte. 
+
 Pour ce faire : 
 1. connectez-vous à votre compte TWITTER Application Mangement, à l'adresse [Application Management](https://apps.twitter.com)
 2. Cliquez sur le Bouton `sign in` et rentrer les informations de votre compte
 3. Cliquez sur le bouton `Create New App`
 4. Renseigner les informations suivantes : 
-* Name : myAppApi
-* Dexcription : My application for Twitter AP I
-* WebSite : http://myAppApi.fr
-4. cliquez sur la case `Developer Agreement' e t cliquez sur le bouton `Create your Twitter application`
-L'application est créee .
+    * Name : myAppApi
+    * Dexcription : My application for Twitter AP I
+    * WebSite : http://myAppApi.fr
+4. cliquez sur la case `Developer Agreement` et cliquez sur le bouton `Create your Twitter application` 
+L'application est créee. 
 5. Cliquez sur l'onglet  `Keys and Access Tokens`
 6. Naviguer dans la page jusqu'à la section `Your Access Token`
 7. Cliquer sur le bouton `Create my access token`
@@ -25,10 +26,11 @@ L'application est créee .
     * Access Token
     * Access Token Secret
 
-L a documentation des API est disponible sur le site [Twitter Developer Documentation]( https://dev.twitter.com/rest/public) 
+La documentation des API est disponible sur le site [Twitter Developer Documentation]( https://dev.twitter.com/rest/public) 
 * * *
 ## Installation
 Cet outil a besoin des logiciels suivants : 
+
 | Outil| Usage | Installation |
 |------|------|-----|
 | nodejs     | serveur JAVASCRIPT pour l'execution des requetes     | installation à partir du site : [nodejs](https://nodejs.org/)    |
