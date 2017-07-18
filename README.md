@@ -41,7 +41,7 @@ Cet outil a besoin des logiciels suivants :
 
 Pour installer tous ces composants, lancer les commandes suivantes  :
 
-````
+```
 git clone https://github.com/thgautier92/twitterApi.git 
 cd twitterApi
 npm install
