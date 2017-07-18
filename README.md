@@ -20,7 +20,7 @@ L'application est créee.
 5. Cliquez sur l'onglet  `Keys and Access Tokens`
 6. Naviguer dans la page jusqu'à la section `Your Access Token`
 7. Cliquer sur le bouton `Create my access token`
-8. Modifier le fichier `twitterAPI.js', avec les clés obtenues :
+8. Modifier le fichier `twitterAPI.js`, avec les clés obtenues :
     * Consumer Key
     * Consumer Secret
     * Access Token
@@ -39,10 +39,13 @@ Cet outil a besoin des logiciels suivants :
 | module COLORS     | module d'affichage en COULEUR du texte du scipt     | installation NPM, avec la commande `npm install colors --save`    |
 | module CLEAR     | module d'effacement de la console     | installation NPM, avec la commande `npm install clear --save`    |
 
-Pour installer tous ces composants, lancer les commandes suivantes  : 
-`git clone https://github.com/thgautier92/twitterApi.git
+Pour installer tous ces composants, lancer les commandes suivantes  :
+
+````
+git clone https://github.com/thgautier92/twitterApi.git 
 cd twitterApi
-npm install`
+npm install
+```
 
 * * *
 ## Appel UNITAIRE
