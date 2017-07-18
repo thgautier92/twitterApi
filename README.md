@@ -52,6 +52,7 @@ npm install
 ```javascript
 node simple.js <chaine à rechercher>
 ```
+La recherche supporte les espaces et __respecte la casse__.
 Le résultat est stocké dans le fichier `RESULT.CSV`. Les données exportées sont : 
 * name
 * screen_name
