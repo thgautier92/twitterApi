@@ -67,8 +67,14 @@ Toutes les valeurs sont séparées par des points-virgules.
 
 ## Appel à partir d'un fichier de valeurs
 Cette option permet de lancer plusieurs recherche à la chaine, à partir d'un fichier de valeurs.  
-Ce fichier, nommé `LISTE.CSV` doit conteny 1 enregistrement par recherche.  
-La recherche supporte les espaces et respecte la casse.
+Ce fichier, nommé `LISTE.CSV` doit contenir __1 enregistrement par recherche__.  
+Exemple : 
+````
+Jean DUPOND, PARIS
+Jean Charles, VERSAILLES
+````
+
+La recherche supporte les espaces et __respecte la casse__.
 
 ### Génération de commandes pour chaque ligne du fichier 
 ```javascript

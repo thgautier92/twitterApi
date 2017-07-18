@@ -1,6 +1,7 @@
 clear
 echo Analyse des comptes TWITTER
 echo ==================================================
+node callTwitter.js 0 Jean-Charles, VERSAILLES
 node callTwitter.js 0 gautier,PARIS
 node callTwitter.js 0 thierry gautier
 node callTwitter.js 0 mallet,saint martin de ré
