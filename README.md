@@ -13,7 +13,12 @@ Cet outil a besoin des logiciels suivants :
 | module OAUTH     |  module de paramétrage du protocole de securité OAUTH    | installation NPM, avec la commande `npm install oauth`    |
 | module PROMPT     | module de saisie pendant l'execution du script     | installation NPM, avec la commande `npm install prompt`     |
 | module COLORS     | module d'affichage en COULEUR du texte du scipt     | installation NPM, avec la commande `npm install colors`    |
+| module CLEAR     | module d'effacement de la console     | installation NPM, avec la commande `npm install clear`    |
 
+Pour installer tous ces composants, lancer les commandes suivantes  : 
+`git clone https://github.com/thgautier92/twitterApi.git
+cd twitterApi
+npm install`
 
 * * *
 ## Appel UNITAIRE
