@@ -95,7 +95,7 @@ var generate = function (numApi, osType) {
     dataOut = dataOut + "echo ==================================================\n";
     fs.readFileSync(fileInput).toString().split(/\r?\n/).forEach(function (line) {
         console.log(line);
-        dataOut = dataOut + "node callTwitter.js " + numApi + " " + line + "\n";
+        dataOut = dataOut + "node " + lstApi.refApi[numApi]['exec'] + ".js " + numApi + " " + line + "\n";
     })
     dataOut = dataOut + "echo ... Le résultat est disponible dans le fichier " + lstApi.refApi[numApi]['fileOut']
     fs.writeFile(fileOutput, dataOut, {
@@ -113,7 +113,7 @@ var generate = function (numApi, osType) {
             stdio: 'inherit'
         });
     } else {
-        console.log("Lancement...(cmd)",fileOutput);
+        console.log("Lancement...(cmd)", fileOutput);
         require('child_process').execSync(fileOutput);
     }
 }
