@@ -7,12 +7,12 @@ const util = require('util');
 const fs = require('fs');
 const https = require("https");
 const request = require('request');
-var os = require("os");
+const eol = require('eol');
 const Q = require('q');
 const colors = require("colors/safe");
 var lstApi = require("./refApi.js");
 const sep = ";";
-const newLine = (process.platform === 'win32' ? '\r\n' : '\n');
+const newLine = "\n";
 
 // ===== Function callApi ==========================================
 var callApi = function (dataIn, apiId) {
@@ -60,29 +60,28 @@ var callApi = function (dataIn, apiId) {
                                 newLine;
                             break;
                         case "searchSocial":
-                            dataOut = dataOut + elt['__index'] + sep +
+                            dataOut = dataOut + dataIn + sep +
                                 elt['title'] + sep +
-                                elt['desc'] + sep +
+                                elt['type'] + sep +
                                 elt['url'] + sep +
                                 elt['userUrl'] + sep +
-                                elt['type'] + sep +
                                 elt['card'] +
                                 newLine;
                             break;
                         default:
-                            dataOut = data;
+                            dataOut = data + newLine;;
                     }
                 });
             } else {
                 dataOut = dataOut + dataIn + sep + "0" + newLine;
             }
-            fs.writeFile(fileResult, util.inspect(dataOut), {
+            fs.writeFile(fileResult, dataOut, {
                 'encode': 'utf8',
                 'flag': 'a'
             }, function (err) {
                 if (err) throw err;
             });
-            deferred.resolve(1);
+            deferred.resolve(jdata.length);
         }
     });
     return deferred.promise;
@@ -91,7 +90,8 @@ var callApi = function (dataIn, apiId) {
 // ===== Start searching ===========================================
 // get all parametres in command line, except script path and name
 var arg = process.argv.splice(3, process.argv.length);
-var line = encodeURIComponent(arg.join(' '));
+//var line = encodeURIComponent(arg.join(' '));
+var line = arg.join(' ');
 callApi(line, process.argv[2]).then(function (info) {
     //console.log(info);
 });

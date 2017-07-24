@@ -11,7 +11,7 @@ const Q = require('q');
 const colors = require("colors/safe");
 
 var lstApi = require("./refApi.js");
-var keyAPi = require("./twitterAPI.js");
+var keyAPi = require("./API_Twitter.js");
 const sep = ";";
 
 // ===== Function callApi ==========================================
@@ -72,7 +72,6 @@ var callApi = function (dataIn, apiId) {
                 });
                 deferred.resolve(jdata.length);
             }
-
         });
     return deferred.promise;
 }

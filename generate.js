@@ -8,7 +8,9 @@ const clear = require('clear');
 const prompt = require('prompt');
 const colors = require("colors/safe");
 const exec = require('child_process').exec;
-var lstApi = require("./refApi.js");
+const lstApi = require("./refApi.js");
+const waitProcess = 10;
+const waitCount = 100;
 
 var osType = process.platform;
 var fileInput = "liste.csv";
@@ -21,15 +23,15 @@ if (osType == 'darwin') {
     fileOutput = fileOutput + ".cmd";
     var command = "start " + fileOutput;
 }
-var fileResult = "result.csv";
 clear();
 //console.log('\033[2J');
-
+console.log('');
 console.log('================================================================================');
 console.log('Génération des commandes pour les appels TWITTER, à partir du fichier', colors.red(fileInput));
-console.log('OS : ', osType);
+console.log('  OS : ', osType);
+console.log("  Pause de", waitProcess + " secondes tous les " + waitCount + " lignes.");
 console.log('================================================================================');
-console.log('Liste des API disponibles');
+console.log('API disponibles :');
 var i = 0;
 var max = lstApi.refApi.length;
 lstApi.refApi.forEach(function (elt) {
@@ -93,27 +95,42 @@ var generate = function (numApi, osType) {
     }
     dataOut = dataOut + "echo " + lstApi.refApi[numApi]['title'] + "\n";
     dataOut = dataOut + "echo ==================================================\n";
+    var i = 1;
+    var total = 1;
     fs.readFileSync(fileInput).toString().split(/\r?\n/).forEach(function (line) {
         console.log(line);
+        line = line.replace("'", " ");
+        if (i >= waitCount) {
+            dataOut = dataOut + "echo -- Attente de " + waitProcess + " secondes...\n";
+            dataOut = dataOut + "sleep " + waitProcess + "\n";
+            i = 1;
+        }
         dataOut = dataOut + "node " + lstApi.refApi[numApi]['exec'] + ".js " + numApi + " " + line + "\n";
+        i = i + 1;
+        total = total + 1;
     })
-    dataOut = dataOut + "echo ... Le résultat est disponible dans le fichier " + lstApi.refApi[numApi]['fileOut']
+    dataOut = dataOut + "echo ... " + total + " lignes traitées.";
+    dataOut = dataOut + "echo ... Le résultat est disponible dans le fichier " + lstApi.refApi[numApi]['fileOut'];
     fs.writeFile(fileOutput, dataOut, {
         'encode': 'utf8',
         'flag': 'w'
     }, function (err) {
-        if (err) throw err;
+        if (err) {
+            console.log("Erreur de creation du fichier de commande", err);
+        } else {
+            console.log('================================================================================');
+            console.log('Le script est généré dans le fichier', fileOutput);
+            console.log('================================================================================');
+            if (osType == "darwin") {
+                console.log("Lancement...(sh)");
+                require('child_process').spawn('sh', [fileOutput], {
+                    stdio: 'inherit'
+                });
+            } else {
+                console.log("Lancement...(cmd)", fileOutput);
+                require('child_process').execSync(fileOutput);
+            }
+        };
     });
-    console.log('================================================================================');
-    console.log('Le script est généré dans le fichier', fileOutput);
-    console.log('================================================================================');
-    if (osType == "darwin") {
-        console.log("Lancement...(sh)");
-        require('child_process').spawn('sh', [fileOutput], {
-            stdio: 'inherit'
-        });
-    } else {
-        console.log("Lancement...(cmd)", fileOutput);
-        require('child_process').execSync(fileOutput);
-    }
+
 }

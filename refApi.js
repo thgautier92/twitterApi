@@ -9,7 +9,7 @@ exports.refApi = [{
         "url": "https://api.twitter.com/1.1/users/search.json?q={{datain}}&page=5&count=20",
         "exec": "callTwitter",
         "format": "searchUser",
-        "fileOut": "result.csv"
+        "fileOut": "result_twitter.csv"
     }, {
         "name": "searchUserDetail",
         "description": "Recherche de comptes Twitter",
@@ -17,7 +17,7 @@ exports.refApi = [{
         "url": "https://api.twitter.com/1.1/users/search.json?q={{datain}}&page=5&count=20",
         "exec": "callTwitter",
         "format": "",
-        "fileOut": "result.json"
+        "fileOut": "result_detail_twitter.json"
     }, {
         "name": "searchGoole",
         "description": "Recherche à partir du moteur Google SEARCH",
