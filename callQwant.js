@@ -15,7 +15,7 @@ const sep = ";";
 const newLine = "\n";
 
 // ===== Function callApi ==========================================
-var callApi = function (dataIn, apiId) {
+var callApi = function (num, dataIn, apiId) {
     //console.log("Recherche =>", dataIn, apiId, format);
     deferred = Q.defer();
     // Get your credentials here: https://dev.twitter.com/apps
@@ -45,7 +45,7 @@ var callApi = function (dataIn, apiId) {
             //console.log(data.data.result.items);
             //console.log("RESULTATS", util.inspect(data));
             var jdata = data.data.result.items;
-            console.log("Occurences trouvées pour ", colors.blue(dataIn), ":", colors.green(jdata.length));
+            console.log("Occurences trouvées pour ", num, colors.blue(dataIn), ":", colors.green(jdata.length));
             var dataOut = "";
             if (jdata.length > 0) {
                 jdata.forEach(function (elt) {
@@ -89,10 +89,10 @@ var callApi = function (dataIn, apiId) {
 
 // ===== Start searching ===========================================
 // get all parametres in command line, except script path and name
-var arg = process.argv.splice(3, process.argv.length);
+var arg = process.argv.splice(4, process.argv.length);
 //var line = encodeURIComponent(arg.join(' '));
 var line = arg.join(' ');
-callApi(line, process.argv[2]).then(function (info) {
+callApi(process.argv[3], line, process.argv[2]).then(function (info) {
     //console.log(info);
 });
 // ===== END =======================================================

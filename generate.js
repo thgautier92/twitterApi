@@ -35,7 +35,7 @@ console.log('API disponibles :');
 var i = 0;
 var max = lstApi.refApi.length;
 lstApi.refApi.forEach(function (elt) {
-    console.log("  " + i + ":" + elt['title']);
+    console.log("  " + i + ":  " + elt['title']);
     i++;
 });
 console.log('');
@@ -78,6 +78,13 @@ prompt.get(schema, function (err, result) {
                 console.log('Fichier supprimé');
             }
         });
+        fs.unlink(lstApi.refApi[result.numApi]['fileErr'], function (err) {
+            if (err) {
+                console.log('Fichier inexistant');
+            } else {
+                console.log('Fichier supprimé');
+            }
+        });
         generate(result.numApi, osType);
     }
     if (result.razFicOut == 'n' || result.razFicOut == 'n') {
@@ -93,19 +100,21 @@ var generate = function (numApi, osType) {
     } else {
         dataOut = dataOut + "@echo off\ncls\n";
     }
+    dataOut = dataOut + "echo ============================================================\n";
     dataOut = dataOut + "echo " + lstApi.refApi[numApi]['title'] + "\n";
-    dataOut = dataOut + "echo ==================================================\n";
+    dataOut = dataOut + "echo Pause de " + waitProcess + " secondes toutes les " + waitCount + " lignes\n";
+    dataOut = dataOut + "echo ============================================================\n";
     var i = 1;
     var total = 1;
     fs.readFileSync(fileInput).toString().split(/\r?\n/).forEach(function (line) {
         console.log(line);
         line = line.replace("'", " ");
         if (i >= waitCount) {
-            dataOut = dataOut + "echo -- Attente de " + waitProcess + " secondes...\n";
+            dataOut = dataOut + "echo -- Lignes traitées : " + total + ". Attente de " + waitProcess + " secondes...\n";
             dataOut = dataOut + "sleep " + waitProcess + "\n";
             i = 1;
         }
-        dataOut = dataOut + "node " + lstApi.refApi[numApi]['exec'] + ".js " + numApi + " " + line + "\n";
+        dataOut = dataOut + "node " + lstApi.refApi[numApi]['exec'] + ".js " + numApi + " " + total + " " + line + "\n";
         i = i + 1;
         total = total + 1;
     })

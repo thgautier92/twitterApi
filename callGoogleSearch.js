@@ -15,7 +15,7 @@ var keyAPi = require("./API_GoogleSearch.js");
 const sep = ";";
 
 // ===== Function callApi ==========================================
-var callApi = function (dataIn, apiId) {
+var callApi = function (num, dataIn, apiId) {
     //console.log("Recherche =>", dataIn, apiId, format);
     deferred = Q.defer();
     // Get your credentials here: https://dev.twitter.com/apps
@@ -48,7 +48,7 @@ var callApi = function (dataIn, apiId) {
             var jdata = JSON.parse(data);
             var jstat = jdata['searchInformation'];
             var jItems = jdata['items'];
-            console.log("Occurences trouvées pour ", colors.blue(dataIn), ":", colors.green(jstat['totalResults']), "en ", colors.green(jstat['formattedSearchTime']), "s");
+            console.log("Occurences trouvées pour ", num, colors.blue(dataIn), ":", colors.green(jstat['totalResults']), "en ", colors.green(jstat['formattedSearchTime']), "s");
             var dataOut = "";
             jItems.forEach(function (elt) {
                 switch (lstApi.refApi[apiId]['format']) {
@@ -83,9 +83,9 @@ var callApi = function (dataIn, apiId) {
 
 // ===== Start searching ===========================================
 // get all parametres in command line, except script path and name
-var arg = process.argv.splice(3, process.argv.length);
+var arg = process.argv.splice(4, process.argv.length);
 var line = encodeURIComponent(arg.join(' '));
-callApi(line, process.argv[2]).then(function (info) {
+callApi(process.argv[3], line, process.argv[2]).then(function (info) {
     //console.log(info);
 });
 // ===== END =======================================================

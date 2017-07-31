@@ -1,2 +1,3 @@
-result.csv
+result_*.csv
+error_*.csv
 start.sh

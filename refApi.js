@@ -9,7 +9,8 @@ exports.refApi = [{
         "url": "https://api.twitter.com/1.1/users/search.json?q={{datain}}&page=5&count=20",
         "exec": "callTwitter",
         "format": "searchUser",
-        "fileOut": "result_twitter.csv"
+        "fileOut": "result_twitter.csv",
+        "fileErr": "error_twitter.csv"
     }, {
         "name": "searchUserDetail",
         "description": "Recherche de comptes Twitter",
@@ -17,7 +18,8 @@ exports.refApi = [{
         "url": "https://api.twitter.com/1.1/users/search.json?q={{datain}}&page=5&count=20",
         "exec": "callTwitter",
         "format": "",
-        "fileOut": "result_detail_twitter.json"
+        "fileOut": "result_detail_twitter.json",
+        "fileErr": "error_detail_twitter.csv"
     }, {
         "name": "searchGoole",
         "description": "Recherche à partir du moteur Google SEARCH",
@@ -25,7 +27,8 @@ exports.refApi = [{
         "url": "https://www.googleapis.com/customsearch/v1?q={{datain}} ",
         "exec": "callGoogleSearch",
         "format": "",
-        "fileOut": "result_google.csv"
+        "fileOut": "result_google.csv",
+        "fileErr": "error_google.csv"
     }, {
         "name": "searchQuantSocial",
         "description": "Recherche RESEAUX SOCIAUX à partir du moteur Qwant",
@@ -33,7 +36,8 @@ exports.refApi = [{
         "url": "https://api.qwant.com/api/search/social?q={{datain}}",
         "exec": "callQwant",
         "format": "searchSocial",
-        "fileOut": "result_qwant_social.csv"
+        "fileOut": "result_qwant_social.csv",
+        "fileErr": "error_qwant_social.csv"
     },
     {
         "name": "searchQuantAll",
@@ -42,6 +46,7 @@ exports.refApi = [{
         "url": "https://api.qwant.com/api/search/all?q={{datain}}",
         "exec": "callQwant",
         "format": "searchFormat",
-        "fileOut": "result_qwant.csv"
+        "fileOut": "result_qwant.csv",
+        "fileErr": "error_qwant.csv"
     }
 ];
