@@ -12,7 +12,7 @@ const colors = require("colors/safe");
 
 var lstApi = require("./refApi.js");
 var keyAPi = require("./API_Twitter.js");
-const sep = ";";
+const sep = "#";
 
 // ===== Function callApi ==========================================
 var callApi = function (num, dataIn, apiId) {
@@ -58,11 +58,11 @@ var callApi = function (num, dataIn, apiId) {
                 jdata.forEach(function (elt) {
                     switch (lstApi.refApi[apiId]['format']) {
                         case "searchUser":
-                            dataOut = dataOut + elt['id_str'] + sep +
+                            dataOut = dataOut + num + sep + elt['id_str'] + sep +
                                 elt['name'] + sep +
                                 elt['screen_name'] + sep +
                                 elt['location'] + sep +
-                                util.inspect(elt['description']) + sep +
+                                //util.inspect(elt['description']) + sep +
                                 elt['protected'] + sep +
                                 elt['followers_count'] + sep +
                                 elt['friends_count'] + sep +

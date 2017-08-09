@@ -9,8 +9,8 @@ const prompt = require('prompt');
 const colors = require("colors/safe");
 const exec = require('child_process').exec;
 const lstApi = require("./refApi.js");
-const waitProcess = 10;
-const waitCount = 100;
+const waitProcess = 60;
+const waitCount = 1000;
 
 var osType = process.platform;
 var fileInput = "liste.csv";
@@ -45,6 +45,13 @@ var schema = [{
         type: 'string',
         validator: /[0-9]/i,
         warning: "Choisir un numéro parmi la liste, entre 0 et " + (max - 1)
+    },
+    {
+        name: 'numStart',
+        message: colors.blue('Numero de la première ligne (1 par defaut, 0 pour abandonner) ?'),
+        type: 'string',
+        validator: /[0-9]/i,
+        warning: 'Choisir un nombre à partir de 1.'
     },
     {
         name: 'razFicOut',
@@ -85,15 +92,17 @@ prompt.get(schema, function (err, result) {
                 console.log('Fichier supprimé');
             }
         });
-        generate(result.numApi, osType);
+        generate(result.numApi, result.numStart, osType);
     }
-    if (result.razFicOut == 'n' || result.razFicOut == 'n') {
-        generate(result.numApi, osType);
+    if (result.razFicOut == 'n' || result.razFicOut == 'N') {
+        generate(result.numApi, result.numStart, osType);
     }
 });
 
 
-var generate = function (numApi, osType) {
+var generate = function (numApi, numStart, osType) {
+    console.log(numApi, numStart, osType);
+    var start = numStart + 0;
     var dataOut = "";
     if (osType == "darwin") {
         dataOut = dataOut + "clear\n";
@@ -103,22 +112,29 @@ var generate = function (numApi, osType) {
     dataOut = dataOut + "echo ============================================================\n";
     dataOut = dataOut + "echo " + lstApi.refApi[numApi]['title'] + "\n";
     dataOut = dataOut + "echo Pause de " + waitProcess + " secondes toutes les " + waitCount + " lignes\n";
+    dataOut = dataOut + "echo Analyse à partir de la ligne n°" + numStart + "\n";
     dataOut = dataOut + "echo ============================================================\n";
     var i = 1;
     var total = 1;
+    var lig = 1;
     fs.readFileSync(fileInput).toString().split(/\r?\n/).forEach(function (line) {
-        console.log(line);
-        line = line.replace("'", " ");
-        if (i >= waitCount) {
-            dataOut = dataOut + "echo -- Lignes traitées : " + total + ". Attente de " + waitProcess + " secondes...\n";
-            dataOut = dataOut + "sleep " + waitProcess + "\n";
-            i = 1;
+        if (lig >= numStart) {
+            console.log(lig, line);
+            line = line.replace("'", " ");
+            if (i >= waitCount) {
+                dataOut = dataOut + "echo -- Lignes traitées : " + total + ". Attente de " + waitProcess + " secondes...\n";
+                dataOut = dataOut + "sleep " + waitProcess + "\n";
+                i = 1;
+            }
+            dataOut = dataOut + "node " + lstApi.refApi[numApi]['exec'] + ".js " + numApi + " " + lig + " " + line + "\n";
+            i = i + 1;
+            total = total + 1;
+        } else {
+            console.log(lig, "non traitée.");
         }
-        dataOut = dataOut + "node " + lstApi.refApi[numApi]['exec'] + ".js " + numApi + " " + total + " " + line + "\n";
-        i = i + 1;
-        total = total + 1;
+        lig = lig + 1;
     })
-    dataOut = dataOut + "echo ... " + total + " lignes traitées.";
+    dataOut = dataOut + "echo ... " + total + " lignes traitées sur " + lig + ".\n";
     dataOut = dataOut + "echo ... Le résultat est disponible dans le fichier " + lstApi.refApi[numApi]['fileOut'];
     fs.writeFile(fileOutput, dataOut, {
         'encode': 'utf8',
